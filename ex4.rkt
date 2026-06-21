@@ -84,12 +84,16 @@
 ;;;; Q2
 
 ;;Signature: get-value(assoc-list, key)
-;;Purpose: Find the value of 'key'. If 'key' is not found return �fail.
+;;Purpose: Find the value of 'key'. If 'key' is not found return 'fail.
 ;;Type: [List<Pair(Symbol,T)>*Symbol -> T | 'fail)
 ;;Tests: (get-value '((a . 3) (b . 4)) 'b) --> 4,(get-value '((a . 3) (b . 4)) 'c) --> 'fail
+
 (define get-value
   (lambda (assoc-list key)
-   @TODO
+    (cond ((empty? assoc-list) 'fail)
+          ((equal? (car (car assoc-list)) key) (cdr (car assoc-list)))
+          (else (get-value (cdr assoc-list) key))
+    )
   )
 )
 
@@ -99,7 +103,10 @@
 ;;Tests: > (get-value$ '((a . 3) (b . 4)) 'b (lambda(x) (* x x )) (lambda()#f)) --> 16, (get-value$ '((a . 3) (b . 4)) 'c (lambda(x) (* x x)) (lambda()#f)) --> #f
 (define get-value$
   (lambda (assoc-list key success fail)
-   @TODO
+   (cond ((empty? assoc-list) (fail))
+          ((equal? (car (car assoc-list)) key) (success (cdr (car assoc-list))))
+          (else (get-value$ (cdr assoc-list) key success fail))
+    )
   )
 )
 

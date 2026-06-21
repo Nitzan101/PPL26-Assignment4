@@ -44,6 +44,13 @@ c.
     (car (find-first (sqrt-lzl x init) (lambda (pair) (< (cdr pair) epsilon))))))
 
 # Q2
+a.
+For f : X1 × X2 × … × Xn → T ∪ {'fail}
+=>  f_sfc : x1 x x2 x ... x xn x [T -> Tsuccess] x [Empty -> Tfail] -> [Tsuccess U Tfail]
 
-
+for each v: 
+    f(args) = v -> f_sfc(args, S, F) = S(v)
+    f(args) = fail -> f_sfc(args, S, F) = F()
     
+d. 
+Let v.
