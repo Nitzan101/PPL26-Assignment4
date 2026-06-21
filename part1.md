@@ -58,3 +58,176 @@ Prove:
     else, let i be the first index s.t. xi.symbol = k. Then from claim we get:
         get-value(l, k) = get-value((xi,...,xn), k) = xi.value.
         get-value$(l, k, S, F) = get-value$((xi,...,xn), k, S, F) = S(xi.value).
+
+# Q3
+3.1:
+1. unify[t(s(s), G, s, p, t(K), s), t(s(G), G, s, p, t(K), U)]
+=>
+Choose t(s(s), G, s, p, t(K), s) = t(s(G), G, s, p, t(K), U)
+->
+* s(s) = s(G)
+* G = G
+* s = s
+* p = p
+* t(K) = t(K)
+* s = U
+
+sub = {}
+
+=>
+Choose s(s) = s(G)
+->
+* s = G
+G = G
+s = s
+p = p
+t(K) = t(K)
+s = U
+
+sub = {}
+
+=>
+Choose s = G
+->
+G = G
+s = s
+p = p
+t(K) = t(K)
+s = U
+
+* sub = {G = s}
+
+=>
+Choose G = G
+->
+* (delete)
+s = s
+p = p
+t(K) = t(K)
+s = U
+
+sub = {G = s}
+
+=>
+Choose s = s
+->
+* (delete)
+p = p
+t(K) = t(K)
+s = U
+
+sub = {G = s}
+
+=>
+Choose p = p
+->
+* (delete)
+t(K) = t(K)
+s = U
+
+sub = {G = s}
+
+=>
+Choose t(K) = t(K)
+->
+* K = K
+s = U
+
+sub = {G = s}
+
+=>
+Choose K = K
+->
+* (delete)
+s = U
+
+sub = {G = s}
+
+=>
+Choose s = U
+->
+
+* sub = {G = s, U = s}
+
+Then, sub = {s = G, U = s}.
+
+2. unify[g(l,M,g,G,U,g,v(M)), g(l,v(U),g,v(M),v(G),g,v(M))]
+=>
+Choose g(l,M,g,G,U,g,v(M)) = g(l,v(U),g,v(M),v(G),g,v(M))
+->
+* l = l
+* M = v(U)
+* g = g
+* G = v(M)
+* U = v(G)
+* g = g
+* v(M) = v(M)
+
+sub = {}
+
+=>
+Choose l = l
+->
+
+* (delete)
+M = v(U)
+g = g
+G = v(M)
+U = v(G)
+g = g
+v(M) = v(M)
+
+sub = {}
+
+=>
+Choose M = v(U)
+->
+
+g = g
+* G = v(v(U))
+U = v(G)
+g = g
+* v(v(U)) = v(v(U))
+
+* sub = {M = v(U)}
+
+=>
+Choose G = v(v(U))
+->
+
+g = g
+* U = v(v(v(U)))
+g = g
+v(v(U)) = v(v(U))
+
+* sub = {M = v(U), G = v(v(U))}
+
+=>
+Choose U = v(v(v(U)))
+->
+
+Failure: infinite loop
+
+3. unify[m(M,N), n(M,N)]
+=>
+Choose m(M,N) = n(M,N)
+->
+* m = n
+
+sub = {}
+
+=>
+Choose m = n
+->
+Failure: Predicate Mismatch
+
+4. unify[p([v | [V | VV]]), p([[v | V] | VV])]
+=>
+Choose p([v | [V | VV]]) = p([[v | V] | VV])
+->
+* [v | [V | VV]] = [[v | V] | VV]
+
+=>
+Choose [v | [V | VV]] = [[v | V] | VV]
+->
+* 
