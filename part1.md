@@ -255,6 +255,6 @@ Failure: infinite loop
 
 3.2:
 a.
-
-list([head | tail]) :- sublist(head | tail).
-sublist(head | tail) :- sublist(head), sublist(tail), sublist(head | tail).
+sub_list([], []).
+sub_list([X | SubTail], [X | ListTail]) :- sub_list(SubTail, ListTail).
+sub_list(SubList, [_ | ListTail]) :- sub_list(SubList, ListTail).
