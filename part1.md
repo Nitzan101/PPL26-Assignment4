@@ -53,4 +53,3 @@ for each v:
     f(args) = fail -> f_sfc(args, S, F) = F()
     
 d. 
-Let v.
