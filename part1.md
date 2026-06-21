@@ -264,3 +264,7 @@ c.
 sub_tree(Tree, Tree).
 sub_tree(SubTree, tree(_, Left, _)) :- sub_tree(SubTree, Left).
 sub_tree(SubTree, tree(_, _, Right)) :- sub_tree(SubTree, Right).
+
+d.
+swap_tree(void,void).
+swap_tree(tree(Root, Left, Right), tree(Root, RLeft, RRight)) :- swap_tree(Left, RRight), swap_tree(Right, RLeft)
