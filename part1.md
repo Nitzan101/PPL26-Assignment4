@@ -1,5 +1,6 @@
 # Q1
 1.1:
+
 a. For  two lazy lists Lzl1, Lzl2, we say that Lzl1~Lzl2 if:
 Lzl1 = Lzl2 = '()
 Or
@@ -24,24 +25,6 @@ even-square-2 applies the filter to 2i+2. Since it is an even number, it passes.
 The (i+1)-th element in both lists is exactly identical: (2i+2)^2. 
 
 Conclusion: By the principle of mathematical induction, for every valid index i, the heads of both lists are identical at that step (Lzl1.head = Lzl2.head). Because the underlying evaluation steps taken to arrive at the next valid element are identical in their outcomes (as proven by the inductive step), it is guaranteed that Lzl1.tail ~ Lzl2.tail.Consequently, even-square-1 is equivalent to even-square-2 according to your definition.
-
-1.2:
-a.
-(define sqrt-lzl (lambda (x init)
-    (cons-lzl (cons init (accuracy x init)) (lambda () (sqrt-lzl x (improve init x))))))
-
-(define accuracy (lambda (x guess)
-    (abs (- (square guess) x))))
-
-b.
-(define find-first
-    (lambda (lzl pred)
-        (cond ((empty-lzl? lzl) 'fail)
-            ((pred (head lzl)) (head lzl))
-            (else (find-first (tail lzl) pred)))))
-c.
-(define sqrt2 (lambda (x init epsilon)
-    (car (find-first (sqrt-lzl x init) (lambda (pair) (< (cdr pair) epsilon))))))
 
 # Q2
 a.

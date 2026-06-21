@@ -53,9 +53,14 @@
 ;;Tests: (take (sqrt-lzl 2 1) 3) →  '((1 . 1) (3/2 . 1/4) (17/12 . 1/144)) 
 (define sqrt-lzl 
   (lambda (x init)
-   @TODO
+    (cons-lzl (cons init (accuracy x init)) 
+              (lambda () (sqrt-lzl x (improve init x)))
+    )
   )
 )  
+
+(define accuracy (lambda (x guess)
+    (abs (- (square guess) x))))
 
 ;;Signature: find-first(lzlst, p)
 ;;Purpose: Return the first item in the given lazy list which satisfies the given predicate. If no such item exists return 'fail.
@@ -65,7 +70,9 @@
 
 (define find-first
   (lambda (lz-lst p)
-   @TODO
+    (cond ((empty-lzl? lz-lst) 'fail)
+          ((p (head lz-lst)) (head lz-lst))
+          (else (find-first (tail lz-lst) p)))
   )
 )
 
@@ -76,10 +83,14 @@
 ;;Tests: (sqrt2 2 1 0.0001) → 1 169/408
 (define sqrt2
   (lambda (x init epsilon)
-   @TODO
+    (car 
+      (find-first 
+        (sqrt-lzl x init) 
+        (lambda (pair) (< (cdr pair) epsilon))
+      )
+    )
   )
 )
-
 
 ;;;; Q2
 
