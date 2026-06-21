@@ -53,4 +53,25 @@ for each v:
     f(args) = fail -> f_sfc(args, S, F) = F()
     
 d. 
-Let v.
+Claim: For every list l=(x1,...,xn), key k,
+    for every i s.t. for every j < i l[j].symbol != k:
+        get-value(l, k) = get-value((xi,...,xn), k).
+        get-value$(l, k, S, F) = get-value$((xi,...,xn), k, S, F).
+
+Claim proof:
+    Base case: i = 1 (trivial)
+        get-value(l, k) = get-value((x1,...,xn), k)
+        get-value$(l, k, S, F) = get-value$((x1,...,xn), k, S, F)
+    Induction step: Let i.
+        From induction assumption,
+            get-value(l, k) = get-value((xi-1, xi,...,xn), k) = get-value((xi,...,xn), k)
+            get-value$(l, k, S, F) = get-value$((xi-1, xi,...,xn), k, S, F) = get-value$((xi,...,xn), k, S, F)
+
+Prove:
+    Let l list l=(x1,...,xn), key k, funcs S, F.
+    If for every i, xi.symbol != k, from claim we get:
+        get-value(l, k) = get-value((xn), k) = get-value('(), k) = 'fail.
+        get-value$(l, k, S, F) = get-value$((xn), k, S, F) = get-value$('(), k, S, F) = F().
+    else, let i be the first index s.t. xi.symbol = k. Then from claim we get:
+        get-value(l, k) = get-value((xi,...,xn), k) = xi.value.
+        get-value$(l, k, S, F) = get-value$((xi,...,xn), k, S, F) = S(xi.value).
