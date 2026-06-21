@@ -258,3 +258,9 @@ a.
 sub_list([], []).
 sub_list([X | SubTail], [X | ListTail]) :- sub_list(SubTail, ListTail).
 sub_list(SubList, [_ | ListTail]) :- sub_list(SubList, ListTail).
+
+
+c.
+sub_tree(Tree, Tree).
+sub_tree(SubTree, tree(_, Left, _)) :- sub_tree(SubTree, Left).
+sub_tree(SubTree, tree(_, _, Right)) :- sub_tree(SubTree, Right).
