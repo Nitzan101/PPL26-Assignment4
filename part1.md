@@ -227,7 +227,34 @@ Choose p([v | [V | VV]]) = p([[v | V] | VV])
 ->
 * [v | [V | VV]] = [[v | V] | VV]
 
+sub = {}
+
 =>
 Choose [v | [V | VV]] = [[v | V] | VV]
 ->
-* 
+* v = [v | V]
+* [V | VV] = VV
+
+sub = {}
+
+=>
+Choose v = [v | V]
+->
+Failure: Atomic = List
+
+5. unify[g([T]), g(T)]
+=> 
+Choose g([T]) = g(T)
+->
+* [T] = T
+
+=> 
+Choose [T] = T
+->
+Failure: infinite loop
+
+3.2:
+a.
+
+list([head | tail]) :- sublist(head | tail).
+sublist(head | tail) :- sublist(head), sublist(tail), sublist(head | tail).
