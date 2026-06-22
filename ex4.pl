@@ -25,8 +25,15 @@ sub_list(L1, [_X | L2]) :- sub_list(L1, L2).
 % Purpose: InversedList is the ‘mirror’ representation of List, i.e, each item in the list is recursively replaced with the item at the position, with refers to the beginning and the end of the list.   
 
 swap_list([], []).
-swap_list([X | L1], L2) :- 
+swap_list(L1, L2) :- swap_helper(L1, [], L2).
 
+swap_helper([], L, L).
+swap_helper([X | L1], L2, L3) :- proccess_item(X, ProccessX),
+                                swap_helper(L1, [ProccessX | L2], L3).
+
+proccess_item([], []) :- !.
+proccess_item(X1, X2) :- swap_helper(X1, [], X2), !.
+proccess_item(X,X).
 
 % Signature: sub_tree(Subtree, Tree)/2
 % Purpose: Tree contains Subtree.
