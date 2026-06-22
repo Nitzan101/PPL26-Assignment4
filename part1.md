@@ -252,3 +252,19 @@ Choose g([T]) = g(T)
 Choose [T] = T
 ->
 Failure: infinite loop
+
+3.3:
+a. picture
+
+b. This is a success proof tree, becaues at least one branch is true.
+This is an infinite tree because at the right branch it can subtitute a good subtitute forever.
+
+c. Yes, because in the order (unary_plus - %1, %2, unary_number - %1, %2) we can see that the first branch is %2,%2,%1,%1, finite(leading to false), and then %2,%2,%1,%2,%1, which leading to true.
+
+d. No. example:
+unary_plus (X, [A | Y], [A | Z]):- unary_plus(X, Y, Z).
+
+?-unary_plus(X1, Y1, Z1).
+-> unary_plus(X, Y2, Z2), {Y1 = [A1 | Y2], Z1 = [A1 | Z2]}
+-> unary_plus(X, Y3, Z3), {Y2 = [A2 | Y3], Z2 = [A2 | Z3]}
+-> ...
